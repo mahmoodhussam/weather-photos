@@ -18,10 +18,30 @@ btn.addEventListener('click',function(){
 				console.log(status);
 			},
 			error:function(xhr,textStatus,err){
-				document.getElementById("city-name").textContent = `The country name is not corect`;				
+				document.getElementById("city-name").textContent = `The country name is not corect`;
+				document.getElementById('icon').src='';
+				document.getElementById("city-temp").innerHTML='';
+				document.getElementById("city-status").textContent=``;
+				document.getElementById("city-m").innerHTML='';	
 				console.log(xhr);
 				console.log(textStatus);
 				console.log(err);
 			}
 		});
+		$.ajax({
+			url : `https://pixabay.com/api/?key=19944081-ffe1e69615260f50e475cf03f&q=${city}&image_type=photo`,
+			dataType:"json",
+			cache:false,
+			success:function(data,status){
+				document.querySelector('.container').style.backgroundImage = `linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url(${data.hits[0].largeImageURL})`;
+				console.log(data);
+				console.log(status);
+			},
+			error:function(xhr,textStatus,err){
+				document.querySelector('.container').style.backgroundImage = `linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url(./b2.jpg)`;
+				console.log(xhr);
+				console.log(textStatus);
+				console.log(err);
+			}
+		});	
 	});
